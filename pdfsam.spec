@@ -1,20 +1,22 @@
 %global _iconsdir %{_datadir}/icons
 
 Name:		pdfsam
-Version:	2.2.4
-Release:	5%{?dist}
+Version:	3.3.2
+Release:	1%{?dist}
 Summary:	PDF Split and Merge enhanced
 Group: 		Applications/Publishing
-License:	GPLv2
-URL:		http://www.pdfsam.org
-Source0:	http://sourceforge.net/projects/pdfsam/files/pdfsam-enhanced/%{version}e/pdfsam-%{version}e-out-src.zip
-Source1:	https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
+License:	GPLv3
+URL:		http://www.pdfsam.org/
+Source0:	https://github.com/torakiki/pdfsam/releases/download/v%{version}/pdfsam-%{version}-bin.zip
+Source1:	pdfsam
+Source2:	pdfsam.png
 
 BuildArch:	noarch
 BuildRequires:	ant
 BuildRequires:	dos2unix
 BuildRequires:	java-1.8.0-openjdk-devel
 BuildRequires:	javapackages-tools
+BuildRequires:	gendesk
 Requires:	java >= 1.7.0
 Requires:	javapackages-tools
 
@@ -26,75 +28,47 @@ needs.
 
 
 %prep
-%setup -q -c %{name}-%{version}e
-# extract all individual source zip files
-for FILE in *.zip; do
-    unzip -q -o $FILE ; rm -f $FILE
-done
-# fix line endings
-for FILE in pdfsam-maine/doc/licenses/*/*.txt; do
-    dos2unix -k -o $FILE
-done
-dos2unix -k -o pdfsam-maine/doc/enhanced/readme.txt
-dos2unix -k -o pdfsam-maine/doc/enhanced/changelog-enhanced.txt
-
+%autosetup -n %{name}-%{version}
 
 %build
-cd pdfsam-maine/ant/
-%ant -Dpdfsam.deploy.dir="%{_javadir}/%{name}" \
-     -Dworkspace.dir="../" \
-     -Dbuild.dir="../build"
+# create *.desktop file
+gendesk -f -n \
+          --pkgname="%{name}" \
+          --pkgdesc="A free open source tool to split and merge pdf documents" \
+          --name="PDFsam" \
+          --categories="Office"
 
 
 %install
-# create start script
-cat << EOF > %{name}.sh
-#!/bin/bash
-cd %{_javadir}/%{name}
-java -jar %{_javadir}/%{name}/%{name}.jar
-cd -
-EOF
-install -D -m 755 %{name}.sh %{buildroot}%{_bindir}/%{name}
+  install -dm755 "$RPM_BUILD_ROOT/%{_javadir}/%{name}/modules"
+  install -Dm644 "pdfsam-community-%{version}.jar" \
+                 "$RPM_BUILD_ROOT/%{_javadir}/%{name}/"
+  install -Dm755 "bin/pdfsam.sh" \
+                 "$RPM_BUILD_ROOT/%{_javadir}/%{name}/bin/pdfsam.sh"
+  install -Dm755 "etc/logback.xml" \
+                 "$RPM_BUILD_ROOT/%{_javadir}/%{name}/etc/logback.xml"
+  install -Dm755 "resources/splash.gif" \
+                 "$RPM_BUILD_ROOT/%{_javadir}/%{name}/resources/splash.gif"
 
-# create application dir and populate it
-install -d -m 755 %{buildroot}%{_javadir}/%{name}
-for i in ext lib plugins pdfsam-%{version}e.jar pdfsam-config.xml; do
-    cp -rf build/pdfsam-maine/release/dist/pdfsam-enhanced/$i %{buildroot}%{_javadir}/%{name}/
-done
-ln -s pdfsam-%{version}e.jar %{buildroot}%{_javadir}/%{name}/%{name}.jar
+  # exec
+  install -Dm755 %{S:1} "$RPM_BUILD_ROOT/usr/bin/pdfsam"
 
-# menu entry and icon #
-install -D -m 644 build/pdfsam-maine/release/dist/pdfsam-enhanced/doc/icons/pdfsam_enhanced.png %{buildroot}%{_datadir}/pixmaps/%{name}.png
-install -D -m 644 build/pdfsam-maine/release/dist/pdfsam-enhanced/doc/icons/pdfsam_enhanced.svg %{buildroot}%{_iconsdir}/hicolor/scalable/apps/%{name}.svg
-
-# License
-cp -f %{S:1} GPL-2.0.txt
-
-install -d -m 755 %{buildroot}%{_datadir}/applications
-cat > %{buildroot}%{_datadir}/applications/%{name}.desktop << EOF
-[Desktop Entry]
-Encoding=UTF-8
-Name=PDFsam
-Comment=%{summary}
-Exec=%{name}
-Icon=%{name}
-Terminal=false
-Type=Application
-StartupNotify=true
-Categories=Office;Java;Viewer;TextTools;
-EOF
+  # desktop
+  install -Dm644 %{S:2} "$RPM_BUILD_ROOT/usr/share/pixmaps/pdfsam.png"
+  install -Dm644 "%{name}.desktop" "$RPM_BUILD_ROOT/usr/share/applications/%{name}.desktop"
 
 %files
-%doc build/pdfsam-maine/release/dist/pdfsam-enhanced/doc/{changelog-enhanced.txt,pdfsam-1.5.0e-tutorial.pdf,readme.txt}
-%license GPL-2.0.txt
+%license LICENSE.txt
 %{_bindir}/%{name}
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/pixmaps/%{name}.png
-%{_iconsdir}/hicolor/scalable/apps/%{name}.svg
 %{_javadir}/%{name}/
 
 
 %changelog
+
+* Tue Sep 26 2017 Unitedrpms Project <unitedrpms AT protonmail DOT com> 3.3.2-1
+- Updated to 3.3.2-1
 
 * Thu Aug 17 2017 Unitedrpms Project <unitedrpms AT protonmail DOT com> 2.2.4-5
 - Upstream
