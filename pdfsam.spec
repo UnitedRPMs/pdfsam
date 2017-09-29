@@ -2,7 +2,7 @@
 
 Name:		pdfsam
 Version:	3.3.2
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	PDF Split and Merge enhanced
 Group: 		Applications/Publishing
 License:	GPLv3
@@ -12,12 +12,9 @@ Source1:	pdfsam
 Source2:	pdfsam.png
 
 BuildArch:	noarch
-BuildRequires:	ant
-BuildRequires:	dos2unix
-BuildRequires:	java-1.8.0-openjdk-devel
-BuildRequires:	javapackages-tools
 BuildRequires:	gendesk
-Requires:	java >= 1.7.0
+Requires:	java >= 1.8.0
+Requires:	java-1.8.0-openjdk-openjfx
 Requires:	javapackages-tools
 
 
@@ -66,6 +63,9 @@ gendesk -f -n \
 
 
 %changelog
+
+* Fri Sep 29 2017 Unitedrpms Project <unitedrpms AT protonmail DOT com> 3.3.2-2
+- Added missed dependency
 
 * Tue Sep 26 2017 Unitedrpms Project <unitedrpms AT protonmail DOT com> 3.3.2-1
 - Updated to 3.3.2-1
