@@ -1,7 +1,7 @@
 %global _iconsdir %{_datadir}/icons
 
 Name:		pdfsam
-Version:	3.3.5
+Version:	3.3.6
 Release:	1%{?dist}
 Summary:	PDF Split and Merge enhanced
 Group: 		Applications/Publishing
@@ -63,6 +63,9 @@ gendesk -f -n \
 
 
 %changelog
+
+* Thu Aug 02 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 3.3.6-1
+- Updated to 3.3.6
 
 * Tue Nov 28 2017 Unitedrpms Project <unitedrpms AT protonmail DOT com> 3.3.5-1
 - Updated to 3.3.5
