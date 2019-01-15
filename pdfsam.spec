@@ -1,21 +1,19 @@
 %global _iconsdir %{_datadir}/icons
 
 Name:		pdfsam
-Version:	4.0.0
+Version:	4.0.1
 Release:	1%{?dist}
 Summary:	PDF Split and Merge enhanced
 Group: 		Applications/Publishing
 License:	GPLv3
 URL:		http://www.pdfsam.org/
-Source0:	https://github.com/torakiki/pdfsam/releases/download/v%{version}/pdfsam-%{version}-bin.zip
+Source0:	https://github.com/torakiki/%{name}/releases/download/v%{version}/%{name}-%{version}-linux.zip
 Source1:	pdfsam
 Source2:	pdfsam.png
 
 BuildArch:	noarch
 BuildRequires:	gendesk
-Requires:	java >= 1.8.0
-Requires:	java-1.8.0-openjdk-openjfx
-Requires:	javapackages-tools
+Requires:	java-11-openjdk
 
 
 %description
@@ -25,7 +23,7 @@ needs.
 
 
 %prep
-%autosetup -n %{name}-%{version}
+%autosetup -n %{name}-%{version}-linux
 
 %build
 # create *.desktop file
@@ -37,15 +35,14 @@ gendesk -f -n \
 
 
 %install
-  install -dm755 "$RPM_BUILD_ROOT/%{_javadir}/%{name}/modules"
-  install -Dm644 "pdfsam-community-%{version}.jar" \
-                 "$RPM_BUILD_ROOT/%{_javadir}/%{name}/"
+
+  install -dm755 "$RPM_BUILD_ROOT/usr/share/java/%{name}/lib"
+  install -Dm644 "pdfsam-basic-%{version}.jar" \
+                 "$RPM_BUILD_ROOT/usr/share/java/%{name}/"
+  install -Dm644 lib/* \
+                 "$RPM_BUILD_ROOT/usr/share/java/%{name}/lib"
   install -Dm755 "bin/pdfsam.sh" \
-                 "$RPM_BUILD_ROOT/%{_javadir}/%{name}/bin/pdfsam.sh"
-  install -Dm755 "etc/logback.xml" \
-                 "$RPM_BUILD_ROOT/%{_javadir}/%{name}/etc/logback.xml"
-  install -Dm755 "resources/splash.gif" \
-                 "$RPM_BUILD_ROOT/%{_javadir}/%{name}/resources/splash.gif"
+                 "$RPM_BUILD_ROOT/usr/share/java/%{name}/bin/pdfsam.sh"
 
   # exec
   install -Dm755 %{S:1} "$RPM_BUILD_ROOT/usr/bin/pdfsam"
@@ -64,8 +61,8 @@ gendesk -f -n \
 
 %changelog
 
-* Thu Dec 27 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.0.0-1
-- Updated to 4.0.0
+* Mon Jan 14 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.0.1-1
+- Updated to 4.0.1
 
 * Fri Sep 07 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 3.3.7-1
 - Updated to 3.3.7
