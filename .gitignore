@@ -5,3 +5,4 @@ SPECS/*
 SRPMS/*
 pdfsam*.zip
 .directory
+*.rpm

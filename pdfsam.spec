@@ -1,7 +1,24 @@
+#
+# spec file for package pdfsam
+#
+# Copyright (c) 2020 UnitedRPMs.
+#
+# All modifications and additions to the file contributed by third parties
+# remain the property of their copyright owners, unless otherwise agreed
+# upon. The license for this file, and modifications and additions to the
+# file, is the same license as for the pristine package itself (unless the
+# license for the pristine package is not an Open Source License, in which
+# case the license is the MIT License). An "Open Source License" is a
+# license that conforms to the Open Source Definition (Version 1.9)
+# published by the Open Source Initiative.
+
+# Please submit bugfixes or comments via https://goo.gl/zqFJft
+#
+
 %global _iconsdir %{_datadir}/icons
 
 Name:		pdfsam
-Version:	4.0.5
+Version:	4.1.1
 Release:	1%{?dist}
 Summary:	PDF Split and Merge enhanced
 Group: 		Applications/Publishing
@@ -60,6 +77,9 @@ gendesk -f -n \
 
 
 %changelog
+
+* Fri Feb 07 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.1.1-1
+- Updated to 4.1.1
 
 * Thu Oct 24 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.0.5-1
 - Updated to 4.0.5
