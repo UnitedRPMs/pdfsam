@@ -1,4 +1,6 @@
-#!/usr/bin/bash
+#!/usr/bin/sh
+
+
 # run application with java env >= 11
 
 PDFSAM_EXECUTABLE="/usr/share/java/pdfsam/bin/pdfsam.sh"
