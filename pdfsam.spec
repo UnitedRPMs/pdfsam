@@ -71,6 +71,9 @@ gendesk -f -n \
   
   # Appdata
   install -Dm 0644 %{S:3} %{buildroot}/%{_metainfodir}/org.pdfsam.pdfsam.metainfo.xml
+  
+  # mangling shebang fix
+   sed -i 's|/bin/sh|/usr/bin/sh|g' %{buildroot}/%{_datadir}/java/pdfsam/bin/pdfsam.sh
 
 %files
 %license LICENSE.txt
