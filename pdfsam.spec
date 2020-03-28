@@ -21,12 +21,13 @@ Name:		pdfsam
 Version:	4.1.2
 Release:	1%{?dist}
 Summary:	PDF Split and Merge enhanced
-Group: 		Applications/Publishing
+Group: 	Applications/Publishing
 License:	GPLv3
-URL:		http://www.pdfsam.org/
+URL:		https://pdfsam.org/
 Source0:	https://github.com/torakiki/%{name}/releases/download/v%{version}/%{name}-%{version}-linux.zip
 Source1:	pdfsam
 Source2:	pdfsam.png
+Source3:	org.pdfsam.pdfsam.metainfo.xml
 
 BuildArch:	noarch
 BuildRequires:	gendesk
@@ -67,11 +68,15 @@ gendesk -f -n \
   # desktop
   install -Dm644 %{S:2} "$RPM_BUILD_ROOT/usr/share/pixmaps/pdfsam.png"
   install -Dm644 "%{name}.desktop" "$RPM_BUILD_ROOT/usr/share/applications/%{name}.desktop"
+  
+  # Appdata
+  install -Dm 0644 %{S:3} %{buildroot}/%{_metainfodir}/org.pdfsam.pdfsam.metainfo.xml
 
 %files
 %license LICENSE.txt
 %{_bindir}/%{name}
 %{_datadir}/applications/%{name}.desktop
+%{_metainfodir}/org.pdfsam.pdfsam.metainfo.xml
 %{_datadir}/pixmaps/%{name}.png
 %{_javadir}/%{name}/
 

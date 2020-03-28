@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>org.pdfsam.pdfsam</id>
+  
+  <name>pdfsam</name>
+  <summary>PDF Split and Merge enhanced</summary>
+  
+  <metadata_license>FSFAP</metadata_license>
+  <project_license>GPL-3.0</project_license>
+  
+  <description>
+    <p>
+      PDFsam is a simple, platform independent software designed to split and merge pdf files. It&apos;s stable, completely free and it should cover most of your needs.
+    </p>
+  </description>
+  
+  <launchable type="desktop-id">pdfsam.desktop</launchable>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://upload.wikimedia.org/wikipedia/commons/2/2b/PDFsam_merge_module.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://pdfsam.org/imgs/features/basic-merge-pdf.png</image>
+    </screenshot>
+  </screenshots>
+</component>
