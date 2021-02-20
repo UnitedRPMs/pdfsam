@@ -1,7 +1,7 @@
 #
 # spec file for package pdfsam
 #
-# Copyright (c) 2020 UnitedRPMs.
+# Copyright (c) 2021 UnitedRPMs.
 #
 # All modifications and additions to the file contributed by third parties
 # remain the property of their copyright owners, unless otherwise agreed
@@ -18,13 +18,13 @@
 %global _iconsdir %{_datadir}/icons
 
 Name:		pdfsam
-Version:	4.2.1
+Version:	4.2.2
 Release:	1%{?dist}
 Summary:	PDF Split and Merge enhanced
 Group: 	Applications/Publishing
 License:	GPLv3
 URL:		https://pdfsam.org/
-Source0:	https://github.com/torakiki/%{name}/releases/download/v%{version}/%{name}-%{version}-linux.zip
+Source0:	https://github.com/torakiki/%{name}/releases/download/v%{version}/%{name}-%{version}-linux.tar.gz
 Source1:	pdfsam
 Source2:	pdfsam.png
 Source3:	org.pdfsam.pdfsam.metainfo.xml
@@ -85,6 +85,9 @@ gendesk -f -n \
 
 
 %changelog
+
+* Mon Feb 15 2021 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.2.2-1
+- Updated to 4.2.2
 
 * Fri Nov 27 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.2.1-1
 - Updated to 4.2.1
