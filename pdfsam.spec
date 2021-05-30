@@ -16,12 +16,13 @@
 #
 
 %global _iconsdir %{_datadir}/icons
+%global _javadir %{_datadir}/java
 
 Name:		pdfsam
-Version:	4.2.3
+Version:	4.2.5
 Release:	1%{?dist}
 Summary:	PDF Split and Merge enhanced
-Group: 	Applications/Publishing
+Group:		Applications/Publishing
 License:	GPLv3
 URL:		https://pdfsam.org/
 Source0:	https://github.com/torakiki/%{name}/releases/download/v%{version}/%{name}-%{version}-linux.tar.gz
@@ -85,6 +86,9 @@ gendesk -f -n \
 
 
 %changelog
+
+* Fri May 28 2021 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.2.5-1
+- Updated to 4.2.5
 
 * Sat Mar 20 2021 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.2.3-1
 - Updated to 4.2.3
