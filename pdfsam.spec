@@ -19,7 +19,7 @@
 %global _javadir %{_datadir}/java
 
 Name:		pdfsam
-Version:	4.2.6
+Version:	4.2.7
 Release:	1%{?dist}
 Summary:	PDF Split and Merge enhanced
 Group:		Applications/Publishing
@@ -86,6 +86,9 @@ gendesk -f -n \
 
 
 %changelog
+
+* Mon Oct 04 2021 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.2.7-1
+- Updated to 4.2.7
 
 * Mon Aug 16 2021 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.2.6-1
 - Updated to 4.2.6
